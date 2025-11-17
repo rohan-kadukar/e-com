@@ -66,6 +66,7 @@ const DashboardSingleUserPage = ({ params }: DashboardUserDetailsProps) => {
           if (response.status === 200) {
             await response.json();
             toast.success("User successfully updated");
+            router.push(`/admin/users`);
           } else {
             const errorData = await response.json();
             toast.error(errorData.error || "Error while updating user");

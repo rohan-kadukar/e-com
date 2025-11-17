@@ -27,6 +27,7 @@ const Footer = () => {
               width={250}
               height={250}
               className="h-auto w-auto"
+              priority
             />
             <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
               <div className="md:grid md:grid-cols-2 md:gap-8">

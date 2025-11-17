@@ -4,8 +4,11 @@ import { isValidEmailAddressFormat } from "@/lib/utils";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { sanitizeFormData } from "@/lib/form-sanitize";
+import apiClient from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const DashboardCreateNewUser = () => {
+  const router = useRouter();
   const [userInput, setUserInput] = useState<{
     email: string;
     password: string;
@@ -36,13 +39,12 @@ const DashboardCreateNewUser = () => {
       }
 
       if (userInput.password.length > 7) {
-        const requestOptions: any = {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(sanitizedUserInput),
-        };
-        ap(`/api/users`, requestOptions)
-          .then((response) => {
+        apiClient.post(`/api/users`, {
+        email: userInput.email,
+        password: userInput.password || undefined,
+        role: userInput.role || undefined,
+      })
+      .then((response) => {
             if(response.status === 201){
               return response.json();
 
@@ -58,6 +60,7 @@ const DashboardCreateNewUser = () => {
               password: "",
               role: "user",
             });
+            router.push(`/admin/users`);
           }).catch(error => {
             toast.error("Error while creating user");
           });

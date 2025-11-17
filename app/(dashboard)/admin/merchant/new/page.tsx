@@ -39,9 +39,12 @@ export default function NewMerchantPage() {
     
     try {
       const response = await apiClient.post("/api/merchants", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        name: formData.name.trim(),
+        email: formData.email || undefined,
+        phone: formData.phone || undefined,
+        address: formData.address || undefined,
+        description: formData.description || undefined,
+        status: formData.status || "ACTIVE",
       });
 
       if (!response.ok) {

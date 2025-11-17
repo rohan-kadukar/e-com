@@ -114,6 +114,7 @@ const Header = () => {
               height={130}
               alt="singitronic logo"
               className="w-56 h-auto"
+              priority
             />
           </Link>
           <div className="flex gap-x-5 items-center">
@@ -135,9 +136,9 @@ const Header = () => {
                 <li>
                   <Link href="/admin">Dashboard</Link>
                 </li>
-                <li>
+                {/* <li>
                   <a>Profile</a>
-                </li>
+                </li> */}
                 <li onClick={handleLogout}>
                   <a href="#">Logout</a>
                 </li>
