@@ -25,13 +25,18 @@ const CheckoutPage = () => {
     orderNotice: "",
   });
   useEffect(() => {
-    if (employeeEmail && employeeEmail !== "") {
-      setCheckoutForm({
-        ...checkoutForm,
-        email: employeeEmail,
-      });
+    const email = session?.user?.email ?? null;
+    if (!email) {
+      toast.error("Email Id not found, please login");
+      return;
     }
-  }, [checkoutForm, employeeEmail]);
+    if (email && email !== "") {
+      setCheckoutForm((prevForm) => ({
+        ...prevForm,
+        email: email,
+      }));
+    }
+  }, [session?.user?.email]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { products, total, clearCart } = useProductStore();
   const router = useRouter();
